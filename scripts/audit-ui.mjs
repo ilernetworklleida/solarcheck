@@ -89,6 +89,18 @@ await waitFor(`document.readyState === 'complete' && Boolean(document.querySelec
 await wait(180);
 result.screenshots.push(await screenshot('solarcheck-hero-slide-1-desktop.png'));
 
+await evaluate(`window.scrollTo(0, 920); true`);
+await wait(850);
+const desktopBackToTop = await evaluate(`(() => ({
+  visible: Boolean(document.querySelector('.back-to-top')),
+  label: document.querySelector('.back-to-top')?.getAttribute('aria-label'),
+  scrollBeforeClick: Math.round(window.scrollY)
+}))()`);
+result.screenshots.push(await screenshot('solarcheck-back-to-top-desktop.png'));
+await evaluate(`document.querySelector('.back-to-top')?.click(); true`);
+await wait(1000);
+result.desktop.backToTop = {...desktopBackToTop, scrollAfterClick: await evaluate(`Math.round(window.scrollY)`)};
+
 const trigger = await evaluate(`(() => { const r=document.querySelector('[aria-controls="solutions-menu"]').getBoundingClientRect(); return {x:r.left+r.width/2,y:r.top+r.height/2,bottom:r.bottom}; })()`);
 await moveMouse(trigger.x, trigger.y);
 await wait(100);
@@ -139,6 +151,24 @@ result.mobile.initial = await evaluate(`(() => ({
   brokenImages: [...document.images].filter(img => img.complete && !img.naturalWidth).length
 }))()`);
 result.screenshots.push(await screenshot('solarcheck-hero-mobile.png'));
+await evaluate(`window.scrollTo(0, 920); true`);
+await wait(850);
+const mobileBackToTop = await evaluate(`(() => {
+  const button = document.querySelector('.back-to-top');
+  const call = document.querySelector('.mobile-call');
+  const buttonRect = button?.getBoundingClientRect();
+  const callRect = call?.getBoundingClientRect();
+  return {
+    visible: Boolean(button),
+    label: button?.getAttribute('aria-label'),
+    overlapsCallButton: Boolean(buttonRect && callRect && !(buttonRect.bottom <= callRect.top || buttonRect.top >= callRect.bottom || buttonRect.right <= callRect.left || buttonRect.left >= callRect.right)),
+    scrollBeforeClick: Math.round(window.scrollY)
+  };
+})()`);
+result.screenshots.push(await screenshot('solarcheck-back-to-top-mobile.png'));
+await evaluate(`document.querySelector('.back-to-top')?.click(); true`);
+await wait(1000);
+result.mobile.backToTop = {...mobileBackToTop, scrollAfterClick: await evaluate(`Math.round(window.scrollY)`)};
 
 for (const index of [1, 2]) {
   await evaluate(`document.querySelectorAll('.hero-slide-tabs button')[${index}].click()`);
@@ -201,6 +231,16 @@ for (const route of routes) {
     logoHomeLink: document.querySelector('.brand')?.getAttribute('href') === '/'
   }})()`);
 }
+
+await viewport(1440, 1000);
+for (const [route, name] of [['/servicios/', 'services'], ['/clearshield-ppf/', 'ppf'], ['/empresa/', 'company']]) {
+  await navigate(`http://127.0.0.1:4173${route}`);
+  result.screenshots.push(await screenshot(`solarcheck-${name}-hero-desktop.png`));
+}
+await navigate('http://127.0.0.1:4173/trabajos/');
+await evaluate(`document.querySelector('img[src*="unnamed-15-privacy"]')?.scrollIntoView({block:'center'}); true`);
+await wait(220);
+result.screenshots.push(await screenshot('solarcheck-privacy-gallery-desktop.png'));
 
 console.log(JSON.stringify(result, null, 2));
 socket.close();

@@ -20,17 +20,17 @@ export const pages = {
   '/': {
     title: 'Solarcheck Lleida | Tintado de lunas y protección solar',
     description: 'Láminas solares homologadas para vehículos y edificios, y protección PPF en Lleida. Asesoramiento profesional y presupuesto sin compromiso.',
-    image: '/images/stock/window-tint-installation.jpg',
+    image: '/images/stock/car-window-detail.jpg',
   },
   '/servicios/': {
     title: 'Servicios de protección solar en Lleida | Solarcheck',
     description: 'Soluciones profesionales para automóvil, edificios y pintura: láminas solares homologadas, control térmico y PPF Clearshield en Lleida.',
-    image: '/images/stock/installer-precision.jpg',
+    image: '/images/stock/tint-workshop-detail.jpg',
   },
   '/laminas-solares-coche/': {
     title: 'Tintado de lunas homologado en Lleida | Solarcheck',
     description: 'Tintado profesional de lunas traseras en Lleida con láminas Solarcheck homologadas, corte ComputerCut, documentación y garantía.',
-    image: '/images/stock/window-tint-installation.jpg',
+    image: '/images/stock/car-window-detail.jpg',
   },
   '/laminas-edificios/': {
     title: 'Láminas solares para edificios en Lleida | Solarcheck',
@@ -40,7 +40,7 @@ export const pages = {
   '/clearshield-ppf/': {
     title: 'PPF para coche en Lleida | Protección Clearshield',
     description: 'Protege la pintura de tu coche frente a gravilla, insectos, roces y arañazos con película PPF instalada profesionalmente en Lleida.',
-    image: '/images/stock/ppf-installation.jpg',
+    image: '/images/stock/ppf-finish-detail.jpg',
   },
   '/trabajos/': {
     title: 'Trabajos de tintado de lunas en Lleida | Solarcheck',
@@ -50,7 +50,7 @@ export const pages = {
   '/empresa/': {
     title: 'Centro Solarcheck en Lleida desde 1998 | Empresa',
     description: 'Conoce el centro Solarcheck Lleida, nuestro taller, proceso de trabajo y más de 25 años de experiencia en protección solar.',
-    image: '/images/workshop.jpg',
+    image: '/images/workshop-privacy.webp',
   },
   '/preguntas-frecuentes/': {
     title: 'Preguntas sobre tintado de lunas y PPF | Solarcheck',
@@ -65,7 +65,7 @@ export const pages = {
   '/presupuesto/': {
     title: 'Pedir presupuesto Solarcheck Lleida | Sin compromiso',
     description: 'Solicita presupuesto para tintado de lunas, láminas solares de edificios o protección PPF en Lleida. Respuesta directa por WhatsApp.',
-    image: '/images/stock/installer-precision.jpg',
+    image: '/images/stock/tint-workshop-detail.jpg',
   },
   '/aviso-legal/': {
     title: 'Aviso legal | Solarcheck Lleida',
@@ -90,7 +90,7 @@ export const services = [
     description: 'Láminas homologadas para las lunas traseras, elegidas e instaladas según tu coche y la forma en que lo utilizas.',
     back: 'Menos acumulación de calor, más privacidad y protección UV para ocupantes e interior. Corte digital sin cuchillas sobre el cristal.',
     href: '/laminas-solares-coche/',
-    image: '/images/stock/window-tint-installation.jpg',
+    image: '/images/stock/car-window-detail.jpg',
   },
   {
     key: 'building',
@@ -110,7 +110,7 @@ export const services = [
     description: 'Película transparente de protección para las zonas de la carrocería más expuestas a gravilla, roces e insectos.',
     back: 'Elige desde zonas críticas hasta una cobertura integral. La película protege el acabado sin cambiar el color original.',
     href: '/clearshield-ppf/',
-    image: '/images/stock/ppf-installation.jpg',
+    image: '/images/stock/ppf-finish-detail.jpg',
   },
 ];
 
@@ -126,7 +126,7 @@ export const projects = [
   {src: '/images/unnamed (11).webp', title: 'Audi A7', type: 'Turismo', note: 'Instalación en taller'},
   {src: '/images/unnamed (13).webp', title: 'Porsche Cayenne', type: 'SUV', note: 'Luneta posterior'},
   {src: '/images/unnamed (14).webp', title: 'BMW X1', type: 'SUV', note: 'Protección solar trasera'},
-  {src: '/images/unnamed (15).webp', title: 'Mercedes-Benz familiar', type: 'Familiar', note: 'Transición legal delante/detrás'},
+  {src: '/images/unnamed-15-privacy.webp', title: 'Mercedes-Benz familiar', type: 'Familiar', note: 'Transición legal delante/detrás'},
 ];
 
 export const faqs = [

@@ -2,6 +2,7 @@ import React, {useEffect, useId, useRef, useState} from 'react';
 import {
   ArrowLeft,
   ArrowRight,
+  ArrowUp,
   Building2,
   CalendarDays,
   Camera,
@@ -552,6 +553,23 @@ export function CookieConsent() {
   </>;
 }
 
+function BackToTop() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const update = () => setVisible(window.scrollY > 700);
+    window.addEventListener('scroll', update, {passive: true});
+    update();
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+
+  if (!visible) return null;
+  return <button className="back-to-top" type="button" aria-label="Volver arriba" title="Volver arriba" onClick={() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top: 0, behavior: reducedMotion ? 'auto' : 'smooth'});
+  }}><ArrowUp/><span>Arriba</span></button>;
+}
+
 export function SiteChrome({children, path}) {
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
@@ -584,6 +602,7 @@ export function SiteChrome({children, path}) {
     <main id="main-content" tabIndex="-1">{children}</main>
     <Footer/>
     <a className="floating-whatsapp" href={`https://wa.me/${BUSINESS.whatsapp}?text=${encodeURIComponent('Hola Solarcheck Lleida, quisiera información.')}`} target="_blank" rel="noreferrer" aria-label="Consultar por WhatsApp"><MessageCircle/><span>¿Te ayudamos?</span></a>
+    <BackToTop/>
     <a className="mobile-call" href={`tel:${BUSINESS.phoneHref}`}><Phone/> Llamar al centro</a>
     <CookieConsent/>
   </>;
@@ -599,7 +618,7 @@ export function LocalBusinessSchema() {
     url: SITE_URL,
     telephone: BUSINESS.phoneHref,
     email: BUSINESS.email,
-    image: `${SITE_URL}/images/workshop.jpg`,
+    image: `${SITE_URL}/images/workshop-privacy.webp`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: BUSINESS.address,

@@ -13,7 +13,7 @@ const escape = (value) => value
 
 function render(path, meta) {
   const canonical = `${SITE_URL}${path === '/' ? '/' : path}`;
-  const image = `${SITE_URL}${meta.image || '/images/workshop.jpg'}`;
+  const image = `${SITE_URL}${meta.image || '/images/workshop-privacy.webp'}`;
   return template
     .replace(/<title>[^<]*<\/title>/, `<title>${escape(meta.title)}</title>`)
     .replace(/<meta name="description" content="[^"]*"\/>/, `<meta name="description" content="${escape(meta.description)}"/>`)
