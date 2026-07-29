@@ -103,6 +103,19 @@ export function Header({path}) {
   const [megaOpen, setMegaOpen] = useState(false);
   const [centerOpen, setCenterOpen] = useState(false);
   const megaRef = useRef(null);
+  const centerRef = useRef(null);
+  const megaCloseTimer = useRef(null);
+  const centerCloseTimer = useRef(null);
+
+  const cancelClose = (timerRef) => {
+    window.clearTimeout(timerRef.current);
+    timerRef.current = null;
+  };
+
+  const scheduleClose = (setter, timerRef) => {
+    cancelClose(timerRef);
+    timerRef.current = window.setTimeout(() => setter(false), 180);
+  };
 
   useEffect(() => {
     setMobileOpen(false);
@@ -118,9 +131,22 @@ export function Header({path}) {
   useEffect(() => {
     const close = (event) => {
       if (!megaRef.current?.contains(event.target)) setMegaOpen(false);
+      if (!centerRef.current?.contains(event.target)) setCenterOpen(false);
+    };
+    const closeWithKeyboard = (event) => {
+      if (event.key !== 'Escape') return;
+      setMegaOpen(false);
+      setCenterOpen(false);
+      setMobileOpen(false);
     };
     document.addEventListener('pointerdown', close);
-    return () => document.removeEventListener('pointerdown', close);
+    document.addEventListener('keydown', closeWithKeyboard);
+    return () => {
+      document.removeEventListener('pointerdown', close);
+      document.removeEventListener('keydown', closeWithKeyboard);
+      cancelClose(megaCloseTimer);
+      cancelClose(centerCloseTimer);
+    };
   }, []);
 
   const active = (href) => path === href || (href !== '/' && path.startsWith(href));
@@ -137,17 +163,20 @@ export function Header({path}) {
     </div>
     <div className="header-main">
       <div className="header-wrap header-inner">
-        <Link href="/" className="brand" aria-label="Solarcheck Lleida, inicio">
-          <img src="/images/logo.png" alt="Solarcheck Lleida" width="310" height="72"/>
-          <span>Centro Lleida</span>
+        <Link href="/" className="brand" aria-label="Solarcheck Lleida, inicio" onClick={() => setMobileOpen(false)}>
+          <span className="brand-mark"><img src="/images/logo.png" alt="Solarcheck Lleida" width="390" height="200"/></span>
+          <span className="brand-location">Centro Lleida</span>
         </Link>
         <nav className="desktop-nav" aria-label="Navegación principal">
-          <Link href="/" className={active('/') ? 'active' : ''}>Inicio</Link>
-          <div className="nav-group" ref={megaRef} onMouseEnter={() => setMegaOpen(true)} onMouseLeave={() => setMegaOpen(false)}>
-            <button className={active('/servicios/') || services.some(s => active(s.href)) ? 'active' : ''} onClick={() => setMegaOpen(v => !v)} aria-expanded={megaOpen}>
+          <div className="nav-group" ref={megaRef}
+            onPointerEnter={() => { cancelClose(megaCloseTimer); setMegaOpen(true); setCenterOpen(false); }}
+            onPointerLeave={() => scheduleClose(setMegaOpen, megaCloseTimer)}
+            onFocus={() => { cancelClose(megaCloseTimer); setMegaOpen(true); }}
+            onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) scheduleClose(setMegaOpen, megaCloseTimer); }}>
+            <button className={active('/servicios/') || services.some(s => active(s.href)) ? 'active' : ''} onClick={() => setMegaOpen(v => !v)} aria-expanded={megaOpen} aria-controls="solutions-menu">
               Soluciones <ChevronDown size={15}/>
             </button>
-            <div className={`mega-menu ${megaOpen ? 'open' : ''}`}>
+            <div id="solutions-menu" className={`mega-menu ${megaOpen ? 'open' : ''}`} onPointerEnter={() => cancelClose(megaCloseTimer)}>
               <div className="mega-intro">
                 <small>PROTECCIÓN 360º</small>
                 <strong>Una solución para cada cristal y cada superficie.</strong>
@@ -161,17 +190,21 @@ export function Header({path}) {
                 </Link>)}
               </div>
               <div className="mega-proof">
-                <img src="/images/work-mercedes-estate.webp" alt="Mercedes-Benz con láminas solares traseras instalado en el centro de Lleida"/>
+                <img src="/images/work-mercedes-estate.webp" alt="Vehículo familiar con láminas solares traseras instalado en el centro de Lleida"/>
                 <span>Trabajo real · Lleida</span>
               </div>
             </div>
           </div>
           <Link href="/trabajos/" className={active('/trabajos/') ? 'active' : ''}>Trabajos</Link>
-          <div className="nav-group compact-group" onMouseEnter={() => setCenterOpen(true)} onMouseLeave={() => setCenterOpen(false)}>
-            <button onClick={() => setCenterOpen(v => !v)} className={['/empresa/', '/preguntas-frecuentes/', '/contacto/'].some(active) ? 'active' : ''} aria-expanded={centerOpen}>
+          <div className="nav-group compact-group" ref={centerRef}
+            onPointerEnter={() => { cancelClose(centerCloseTimer); setCenterOpen(true); setMegaOpen(false); }}
+            onPointerLeave={() => scheduleClose(setCenterOpen, centerCloseTimer)}
+            onFocus={() => { cancelClose(centerCloseTimer); setCenterOpen(true); }}
+            onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) scheduleClose(setCenterOpen, centerCloseTimer); }}>
+            <button onClick={() => setCenterOpen(v => !v)} className={['/empresa/', '/preguntas-frecuentes/', '/contacto/'].some(active) ? 'active' : ''} aria-expanded={centerOpen} aria-controls="center-menu">
               El centro <ChevronDown size={15}/>
             </button>
-            <div className={`nav-popover ${centerOpen ? 'open' : ''}`}>
+            <div id="center-menu" className={`nav-popover ${centerOpen ? 'open' : ''}`} onPointerEnter={() => cancelClose(centerCloseTimer)}>
               <Link href="/empresa/"><strong>Quiénes somos</strong><small>Experiencia y método</small></Link>
               <Link href="/preguntas-frecuentes/"><strong>Preguntas frecuentes</strong><small>ITV, garantías y cuidados</small></Link>
               <Link href="/contacto/"><strong>Contacto</strong><small>Horario y cómo llegar</small></Link>
@@ -189,13 +222,12 @@ export function Header({path}) {
     </div>
     <div className={`mobile-panel ${mobileOpen ? 'open' : ''}`} aria-hidden={!mobileOpen}>
       <nav aria-label="Navegación móvil">
-        <Link href="/" className="mobile-main-link">Inicio <span>01</span></Link>
-        <Link href="/servicios/" className="mobile-main-link">Soluciones <span>02</span></Link>
+        <Link href="/servicios/" className="mobile-main-link">Soluciones <span>01</span></Link>
         <div className="mobile-subnav">
           {services.map(service => <Link href={service.href} key={service.key}><span>{service.number}</span>{service.title}<ArrowRight size={16}/></Link>)}
         </div>
-        <Link href="/trabajos/" className="mobile-main-link">Trabajos <span>03</span></Link>
-        <Link href="/empresa/" className="mobile-main-link">El centro <span>04</span></Link>
+        <Link href="/trabajos/" className="mobile-main-link">Trabajos <span>02</span></Link>
+        <Link href="/empresa/" className="mobile-main-link">El centro <span>03</span></Link>
         <div className="mobile-subnav two-col">
           <Link href="/preguntas-frecuentes/">Preguntas frecuentes</Link>
           <Link href="/contacto/">Contacto</Link>
@@ -215,7 +247,7 @@ export function Footer() {
     <div className="footer-glow"/>
     <div className="shell footer-main">
       <div className="footer-brand">
-        <img src="/images/logo.png" alt="Solarcheck Lleida" width="310" height="72"/>
+        <span className="footer-brand-mark"><img src="/images/logo.png" alt="Solarcheck Lleida" width="390" height="200"/></span>
         <p>Protección solar profesional para vehículos y edificios. Instalación especializada en Lleida desde 1998.</p>
         <a className="footer-rating" href={BUSINESS.maps} target="_blank" rel="noreferrer"><span>Centro en Lleida</span><ExternalLink size={14}/></a>
       </div>

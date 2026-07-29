@@ -20,7 +20,7 @@ export const pages = {
   '/': {
     title: 'Solarcheck Lleida | Tintado de lunas y protección solar',
     description: 'Láminas solares homologadas para vehículos y edificios, y protección PPF en Lleida. Asesoramiento profesional y presupuesto sin compromiso.',
-    image: '/images/work-mercedes-estate.webp',
+    image: '/images/stock/window-tint-installation.jpg',
   },
   '/servicios/': {
     title: 'Servicios de protección solar en Lleida | Solarcheck',
@@ -30,7 +30,7 @@ export const pages = {
   '/laminas-solares-coche/': {
     title: 'Tintado de lunas homologado en Lleida | Solarcheck',
     description: 'Tintado profesional de lunas traseras en Lleida con láminas Solarcheck homologadas, corte ComputerCut, documentación y garantía.',
-    image: '/images/stock/hero-rear-window.jpg',
+    image: '/images/stock/window-tint-installation.jpg',
   },
   '/laminas-edificios/': {
     title: 'Láminas solares para edificios en Lleida | Solarcheck',
@@ -90,7 +90,7 @@ export const services = [
     description: 'Láminas homologadas para las lunas traseras, elegidas e instaladas según tu coche y la forma en que lo utilizas.',
     back: 'Menos acumulación de calor, más privacidad y protección UV para ocupantes e interior. Corte digital sin cuchillas sobre el cristal.',
     href: '/laminas-solares-coche/',
-    image: '/images/stock/hero-rear-window.jpg',
+    image: '/images/stock/window-tint-installation.jpg',
   },
   {
     key: 'building',
@@ -115,18 +115,18 @@ export const services = [
 ];
 
 export const projects = [
-  {src: '/images/work-mercedes-estate.webp', title: 'Mercedes-Benz Estate', type: 'Familiar', note: 'Lámina solar trasera'},
+  {src: '/images/work-mercedes-estate.webp', title: 'Mercedes-Benz familiar', type: 'Familiar', note: 'Lámina solar trasera'},
   {src: '/images/work-audi-a7.webp', title: 'Audi A7', type: 'Turismo', note: 'Privacidad y confort'},
   {src: '/images/work-ford-ranger.webp', title: 'Ford Ranger', type: 'Profesional', note: 'Protección para uso intensivo'},
   {src: '/images/work-audi-a3.webp', title: 'Audi A3', type: 'Turismo', note: 'Acabado integrado'},
-  {src: '/images/work-bmw-x4.webp', title: 'BMW X4', type: 'SUV', note: 'Corte ComputerCut'},
+  {src: '/images/work-bmw-x4.webp', title: 'BMW SUV', type: 'SUV', note: 'Corte ComputerCut'},
   {src: '/images/work-mercedes-coupe.webp', title: 'Mercedes-Benz Coupé', type: 'Turismo', note: 'Estética y protección UV'},
   {src: '/images/unnamed (5).webp', title: 'BMW X3', type: 'SUV', note: 'Lunas posteriores'},
-  {src: '/images/unnamed (7).webp', title: 'Škoda', type: 'Familiar', note: 'Confort familiar'},
+  {src: '/images/unnamed (7).webp', title: 'Škoda familiar', type: 'Familiar', note: 'Confort familiar'},
   {src: '/images/unnamed (11).webp', title: 'Audi A7', type: 'Turismo', note: 'Instalación en taller'},
   {src: '/images/unnamed (13).webp', title: 'Porsche Cayenne', type: 'SUV', note: 'Luneta posterior'},
   {src: '/images/unnamed (14).webp', title: 'BMW X1', type: 'SUV', note: 'Protección solar trasera'},
-  {src: '/images/unnamed (15).webp', title: 'Mercedes-Benz Estate', type: 'Familiar', note: 'Transición legal delante/detrás'},
+  {src: '/images/unnamed (15).webp', title: 'Mercedes-Benz familiar', type: 'Familiar', note: 'Transición legal delante/detrás'},
 ];
 
 export const faqs = [

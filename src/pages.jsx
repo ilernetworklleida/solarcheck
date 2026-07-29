@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {
   ArrowRight,
   Award,
@@ -24,6 +24,8 @@ import {
   MousePointer2,
   MoveRight,
   Phone,
+  Pause,
+  Play,
   ScanLine,
   Shield,
   ShieldCheck,
@@ -59,6 +61,118 @@ const ButtonPair = ({primary = '/presupuesto/', primaryLabel = 'Pedir presupuest
 </div>;
 
 const Metric = ({value, label, detail}) => <div className="metric"><strong>{value}</strong><span>{label}</span>{detail && <small>{detail}</small>}</div>;
+
+const homeHeroSlides = [
+  {
+    key: 'tintado',
+    nav: 'Tintado de lunas',
+    eyebrow: 'LÁMINAS SOLARES · AUTOMÓVIL',
+    title: 'Tintado de lunas.',
+    highlight: 'Bien hecho.',
+    text: 'Instalamos láminas certificadas en las lunas laterales traseras y la luneta. Más privacidad, mayor confort y un acabado integrado en el vehículo.',
+    primary: 'Presupuestar mi coche',
+    secondary: 'Ver cómo trabajamos',
+    secondaryHref: '/laminas-solares-coche/',
+    proof: ['Lunas traseras y luneta', 'Documentación de la lámina'],
+  },
+  {
+    key: 'trabajos',
+    nav: 'Resultados reales',
+    eyebrow: 'TRABAJOS REALES · CENTRO DE LLEIDA',
+    title: 'El acabado habla.',
+    highlight: 'Míralo de cerca.',
+    text: 'Vehículos instalados en el centro, fotografiados sin renders ni resultados inventados. Abre la galería y comprueba cómo se integra cada tonalidad.',
+    primary: 'Ver todos los trabajos',
+    primaryHref: '/trabajos/',
+    secondary: 'Pedir orientación',
+    secondaryHref: '/presupuesto/',
+    proof: ['Fotografías del centro', 'Resultados sin recreaciones'],
+  },
+  {
+    key: 'soluciones',
+    nav: 'Todas las soluciones',
+    eyebrow: 'AUTOMÓVIL · EDIFICIOS · PPF',
+    title: 'Cada superficie pide',
+    highlight: 'su propia solución.',
+    text: 'Control solar para vidrio y protección transparente para pintura. Te ayudamos a elegir según el uso, el material y el resultado que necesitas.',
+    primary: 'Explorar soluciones',
+    primaryHref: '/servicios/',
+    secondary: 'Hablar con el centro',
+    secondaryHref: '/contacto/',
+    proof: ['Diagnóstico antes de instalar', 'Recomendación según el caso'],
+  },
+];
+
+function HomeHeroMedia({slide}) {
+  if (slide.key === 'tintado') return <div className="hero-stage hero-stage-process">
+    <img src="/images/stock/window-tint-installation.jpg" alt="Profesional aplicando una lámina de tintado sobre la luna lateral de un vehículo" fetchPriority="high" decoding="async"/>
+    <div className="hero-stage-shade"/><div className="glass-scan"/>
+    <div className="hero-process-caption"><small>PROCESO ILUSTRATIVO</small><strong>La lámina se adapta y remata sobre el vidrio.</strong></div>
+    <div className="hero-legal-chip"><BadgeCheck/><span><strong>Instalación habitual</strong>Lunas traseras y luneta</span></div>
+    <span className="stock-note">Fotografía de stock · Pexels</span>
+  </div>;
+
+  if (slide.key === 'trabajos') return <div className="hero-stage hero-stage-projects" aria-label="Collage de trabajos reales realizados en el centro">
+    <figure className="hero-project-main"><img src="/images/work-mercedes-estate.webp" alt="Vehículo familiar gris con las lunas posteriores tintadas dentro del taller"/><figcaption>Familiar · Vista completa</figcaption></figure>
+    <figure><img src="/images/work-audi-a7.webp" alt="Berlina gris con la luneta posterior tintada dentro del taller"/><figcaption>Luneta · Acabado integrado</figcaption></figure>
+    <figure><img src="/images/work-audi-a3.webp" alt="Turismo blanco con la luneta posterior tintada dentro del taller"/><figcaption>Trabajo real · Lleida</figcaption></figure>
+    <span className="hero-real-stamp"><strong>3</strong> acabados reales<br/>en menos espacio</span>
+  </div>;
+
+  return <div className="hero-stage hero-stage-services" aria-label="Servicios de automóvil, edificios y protección de pintura">
+    <Link href="/laminas-solares-coche/" className="hero-service-panel auto"><img src="/images/unnamed (15).webp" alt="Vehículo familiar con lunas traseras oscuras y ventanillas delanteras transparentes"/><span><small>01 · AUTOMÓVIL</small><strong>Láminas solares</strong><ArrowRight/></span></Link>
+    <Link href="/laminas-edificios/" className="hero-service-panel building"><img src="/images/stock/architectural-glass.jpg" alt="Fachada acristalada de un edificio al atardecer"/><span><small>02 · EDIFICIOS</small><strong>Control solar</strong><ArrowRight/></span></Link>
+    <Link href="/clearshield-ppf/" className="hero-service-panel ppf"><img src="/images/stock/ppf-installation.jpg" alt="Profesionales preparando una película de protección para la carrocería"/><span><small>03 · PINTURA</small><strong>Clearshield PPF</strong><ArrowRight/></span></Link>
+  </div>;
+}
+
+function HomeHero() {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [interactionPaused, setInteractionPaused] = useState(false);
+  const touchStart = useRef(null);
+  const slide = homeHeroSlides[active];
+
+  const move = (direction) => setActive(current => (current + direction + homeHeroSlides.length) % homeHeroSlides.length);
+
+  useEffect(() => {
+    if (paused || interactionPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const timer = window.setInterval(() => move(1), 8500);
+    return () => window.clearInterval(timer);
+  }, [active, paused, interactionPaused]);
+
+  return <section className={`home-hero hero-variant-${slide.key}`}
+    aria-roledescription="carrusel" aria-label="Presentación de servicios"
+    onPointerEnter={() => setInteractionPaused(true)} onPointerLeave={() => setInteractionPaused(false)}
+    onFocusCapture={() => setInteractionPaused(true)}
+    onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setInteractionPaused(false); }}
+    onTouchStart={(event) => { touchStart.current = event.touches[0]?.clientX; }}
+    onTouchEnd={(event) => { const end = event.changedTouches[0]?.clientX; if (touchStart.current != null && end != null && Math.abs(end - touchStart.current) > 55) move(end < touchStart.current ? 1 : -1); touchStart.current = null; }}>
+    <div className="hero-noise"/><div className="hero-orb hero-orb-one"/><div className="hero-orb hero-orb-two"/>
+    <div className="shell home-hero-grid" key={slide.key}>
+      <div className="home-hero-copy">
+        <div className="eyebrow light"><span/> {slide.eyebrow}</div>
+        <h1>{slide.title}<br/><em>{slide.highlight}</em></h1>
+        <p>{slide.text}</p>
+        <ButtonPair primary={slide.primaryHref || '/presupuesto/'} primaryLabel={slide.primary} secondary={slide.secondaryHref} secondaryLabel={slide.secondary}/>
+        <div className="hero-trust-row">
+          <span><ShieldCheck/> {slide.proof[0]}</span><span><FileCheck2/> {slide.proof[1]}</span>
+        </div>
+      </div>
+      <HomeHeroMedia slide={slide}/>
+      <div className="hero-slider-controls">
+        <button className="hero-arrow" onClick={() => move(-1)} aria-label="Ver slide anterior"><ChevronLeft/></button>
+        <div className="hero-slide-tabs" role="tablist" aria-label="Seleccionar contenido del hero">
+          {homeHeroSlides.map((item, index) => <button key={item.key} role="tab" aria-selected={active === index} className={active === index ? 'active' : ''} onClick={() => setActive(index)}><span>0{index + 1}</span><strong>{item.nav}</strong><i/></button>)}
+        </div>
+        <button className="hero-arrow" onClick={() => move(1)} aria-label="Ver slide siguiente"><ChevronRight/></button>
+        <button className="hero-pause" onClick={() => setPaused(value => !value)} aria-label={paused ? 'Reanudar cambio automático' : 'Pausar cambio automático'}>{paused ? <Play/> : <Pause/>}</button>
+      </div>
+    </div>
+    <p className="sr-only" aria-live="polite">Slide {active + 1} de {homeHeroSlides.length}: {slide.nav}</p>
+    <div className="hero-ticker"><div><span>AUTOMÓVIL</span><i/> <span>EDIFICIOS</span><i/> <span>PPF CLEARSHIELD</span><i/> <span>COMPUTERCUT</span><i/> <span>LLEIDA</span><i/> <span>AUTOMÓVIL</span><i/> <span>EDIFICIOS</span><i/> <span>PPF CLEARSHIELD</span></div></div>
+  </section>;
+}
 
 function ProblemExplorer() {
   const problems = [
@@ -100,39 +214,7 @@ export function HomePage() {
   }), []);
   return <>
     <Seo path="/" schema={schema}/>
-    <section className="home-hero">
-      <div className="hero-noise"/>
-      <div className="hero-orb hero-orb-one"/><div className="hero-orb hero-orb-two"/>
-      <div className="shell home-hero-grid">
-        <div className="home-hero-copy">
-          <div className="eyebrow light"><span/> CENTRO ESPECIALIZADO · LLEIDA</div>
-          <h1>Controla el sol.<br/><em>Disfruta el camino.</em></h1>
-          <p>Láminas profesionales para vehículos y edificios, y protección PPF para la pintura. Soluciones precisas, legales y hechas para durar.</p>
-          <ButtonPair primaryLabel="Configura tu presupuesto" secondaryLabel="Explorar soluciones" secondary="/servicios/"/>
-          <div className="hero-trust-row">
-            <span><ShieldCheck/> Instalación especializada</span>
-            <span><FileCheck2/> Documentación y garantía</span>
-          </div>
-        </div>
-        <div className="hero-collage" aria-label="Selección de trabajos y soluciones Solarcheck">
-          <div className="hero-photo-main">
-            <img src="/images/stock/hero-rear-window.jpg" alt="Detalle de las lunas traseras de un automóvil"/>
-            <div className="glass-scan"/>
-            <span className="stock-note">Fotografía de producto</span>
-          </div>
-          <div className="hero-photo-work">
-            <img src="/images/work-mercedes-estate.webp" alt="Mercedes-Benz con láminas solares traseras instalado en Solarcheck Lleida"/>
-            <span><b>Trabajo real</b> · Lleida</span>
-          </div>
-          <div className="hero-float-card">
-            <strong>+25</strong><span>años cuidando<br/>cada detalle</span>
-          </div>
-          <div className="hero-legal-chip"><BadgeCheck/><span><strong>Lunas traseras</strong>Instalación homologada</span></div>
-          <div className="hero-coordinate">41.6176° N<br/>0.6200° E</div>
-        </div>
-      </div>
-      <div className="hero-ticker"><div><span>AUTOMÓVIL</span><i/> <span>EDIFICIOS</span><i/> <span>PPF CLEARSHIELD</span><i/> <span>COMPUTERCUT</span><i/> <span>LLEIDA</span><i/> <span>AUTOMÓVIL</span><i/> <span>EDIFICIOS</span><i/> <span>PPF CLEARSHIELD</span></div></div>
-    </section>
+    <HomeHero/>
 
     <section className="proof-bar">
       <div className="shell proof-grid">
