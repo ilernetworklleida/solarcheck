@@ -1,0 +1,13 @@
+{
+  "name": "Solarcheck Lleida",
+  "short_name": "Solarcheck",
+  "description": "Protección solar profesional para vehículos y edificios en Lleida.",
+  "lang": "es",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#071419",
+  "theme_color": "#071419",
+  "icons": [
+    {"src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}
