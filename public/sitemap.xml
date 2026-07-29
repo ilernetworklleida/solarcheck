@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://solarcheck.proposta.cat/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/servicios/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/laminas-solares-coche/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/laminas-edificios/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/clearshield-ppf/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/trabajos/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/empresa/</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/preguntas-frecuentes/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/contacto/</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/presupuesto/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/aviso-legal/</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/privacidad/</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://solarcheck.proposta.cat/cookies/</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+</urlset>
