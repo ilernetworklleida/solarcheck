@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
 :root {
   --ink: #002856;
-  --orange: #002856;
+  --orange: #0874c9;
+  --blue: #075fa8;
   --cream: #f3f4f2;
   --line: #d6dce2;
   --muted: #607080;
@@ -52,8 +53,14 @@ header {
   border-bottom: 1px solid #ffffff30;
 }
 .brand img {
-  width: 210px;
-  filter: brightness(0) invert(1);
+  width: 190px;
+  display: block;
+  filter: none;
+}
+.brand {
+  background: white;
+  padding: 9px 14px;
+  box-shadow: 0 10px 35px #001d4026;
 }
 nav {
   display: flex;
@@ -103,11 +110,11 @@ nav > a:hover {
   background:
     linear-gradient(
       90deg,
-      rgba(0, 40, 86, 0.95) 0%,
-      rgba(0, 40, 86, 0.72) 44%,
-      rgba(0, 40, 86, 0.14) 75%
+      rgba(0, 65, 125, 0.92) 0%,
+      rgba(0, 74, 142, 0.66) 44%,
+      rgba(0, 72, 138, 0.12) 75%
     ),
-    linear-gradient(0deg, rgba(0, 40, 86, 0.72), transparent 45%);
+    linear-gradient(0deg, rgba(0, 65, 125, 0.68), transparent 45%);
 }
 .hero-copy {
   position: relative;
@@ -258,7 +265,7 @@ h1 {
 .service-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, #002856f2 0%, transparent 70%);
+  background: linear-gradient(0deg, #075fa8f2 0%, transparent 70%);
 }
 .service-num {
   position: absolute;
@@ -438,7 +445,7 @@ h1 {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(2, 13, 16, 0.92), rgba(2, 13, 16, 0.35)),
+    linear-gradient(90deg, rgba(0, 76, 145, 0.9), rgba(7, 95, 168, 0.25)),
     url("/images/stock-glass-building.jpg") center/cover;
 }
 .building-content {
@@ -566,7 +573,7 @@ h1 {
   color: var(--orange);
 }
 .booking {
-  background: #002856;
+  background: var(--blue);
   color: white;
   padding: 120px 7vw;
   display: grid;
@@ -790,8 +797,10 @@ footer {
   border-bottom: 1px solid #ffffff25;
 }
 .footer-top img {
-  width: 210px;
-  filter: brightness(0) invert(1);
+  width: 190px;
+  background: white;
+  padding: 10px 14px;
+  filter: none;
 }
 .footer-top p {
   color: #899597;
@@ -862,8 +871,8 @@ footer {
   }
   .hero-shade {
     background:
-      linear-gradient(90deg, rgba(0, 40, 86, 0.94), rgba(0, 40, 86, 0.4)),
-      linear-gradient(0deg, #002856e8, transparent);
+      linear-gradient(90deg, rgba(0, 76, 145, 0.92), rgba(7, 95, 168, 0.36)),
+      linear-gradient(0deg, #075fa8e8, transparent);
   }
   .hero-copy > p {
     font-size: 17px;
@@ -1016,8 +1025,141 @@ footer {
     font-size: 8px;
   }
 }
+
+.contact-header {
+  position: relative;
+  background: white;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.contact-header .brand {
+  box-shadow: none;
+  padding-left: 0;
+}
+.contact-page {
+  background: var(--cream);
+}
+.contact-hero {
+  min-height: 500px;
+  padding: 105px 7vw 90px;
+  display: flex;
+  align-items: center;
+  color: white;
+  background:
+    linear-gradient(90deg, rgba(7, 95, 168, 0.98), rgba(8, 116, 201, 0.72)),
+    url("/images/stock-glass-building.jpg") center/cover;
+}
+.contact-hero h1 {
+  font-size: clamp(50px, 6vw, 88px);
+  max-width: 950px;
+}
+.contact-hero em {
+  color: #b9dcff;
+}
+.contact-hero p {
+  max-width: 660px;
+  color: #e5f1fc;
+  font-size: 18px;
+  line-height: 1.7;
+}
+.contact-layout {
+  padding: 100px 7vw;
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 7vw;
+}
+.contact-details h2 {
+  font-size: clamp(38px, 4vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  margin-bottom: 40px;
+}
+.contact-card {
+  display: flex;
+  gap: 18px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.contact-card > svg {
+  color: var(--orange);
+  flex: 0 0 auto;
+}
+.contact-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.contact-card small {
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+}
+.contact-card strong,
+.contact-card a {
+  font: 700 17px "Manrope";
+}
+.contact-card span {
+  color: var(--muted);
+}
+.contact-details > .btn {
+  margin-top: 28px;
+}
+.map-wrap {
+  min-height: 650px;
+  position: relative;
+  background: #dce8f1;
+  box-shadow: 0 25px 60px #0028561f;
+}
+.map-wrap iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 650px;
+  border: 0;
+  display: block;
+}
+.map-wrap > a {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background: var(--orange);
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-weight: 700;
+  box-shadow: 0 12px 30px #00285640;
+}
+.map-wrap > a svg {
+  width: 18px;
+}
+.contact-footer {
+  padding-top: 30px;
+}
+.contact-footer .footer-bottom {
+  padding-top: 0;
+  justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+  .contact-header nav {
+    display: none;
+  }
+  .contact-hero {
+    min-height: 430px;
+    padding: 80px 22px;
+  }
+  .contact-layout {
+    grid-template-columns: 1fr;
+    padding: 70px 22px;
+  }
+  .map-wrap,
+  .map-wrap iframe {
+    min-height: 480px;
+  }
+}
 .projects {
-  background: #002856;
+  background: var(--blue);
   color: white;
   padding: 120px 6vw;
 }
@@ -1069,7 +1211,7 @@ footer {
   right: 0;
   bottom: 0;
   padding: 55px 22px 20px;
-  background: linear-gradient(transparent, #002856f0);
+  background: linear-gradient(transparent, #075fa8f2);
   display: flex;
   gap: 14px;
   align-items: end;

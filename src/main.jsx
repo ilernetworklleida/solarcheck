@@ -120,10 +120,108 @@ const faqs = [
   ],
 ];
 
+function ContactPage() {
+  return (
+    <>
+      <header className="contact-header">
+        <a className="brand" href="/">
+          <img src="/images/logo.png" alt="Solarcheck Lleida" />
+        </a>
+        <nav>
+          <a href="/#servicios">Servicios</a>
+          <a href="/#automovil">Automóvil</a>
+          <a href="/#edificios">Edificios</a>
+          <a href="/#empresa">Empresa</a>
+          <a className="nav-cta" href={`https://wa.me/${WHATSAPP}`}>
+            Pedir cita <ArrowRight size={16} />
+          </a>
+        </nav>
+      </header>
+      <main className="contact-page">
+        <section className="contact-hero">
+          <div>
+            <div className="section-kicker light">CONTACTO · LLEIDA</div>
+            <h1>
+              Hablemos de tu
+              <br />
+              próximo <em>proyecto.</em>
+            </h1>
+            <p>
+              Ven a vernos, llámanos o escríbenos. Te asesoramos sin compromiso
+              sobre la solución más adecuada para tu vehículo o edificio.
+            </p>
+          </div>
+        </section>
+        <section className="contact-layout">
+          <div className="contact-details">
+            <div className="section-kicker">SOLARCHECK LLEIDA</div>
+            <h2>Estamos en el centro de Lleida.</h2>
+            <div className="contact-card">
+              <MapPin />
+              <div>
+                <small>DIRECCIÓN</small>
+                <strong>C/ Indívil i Mandoni, 3</strong>
+                <span>25003 Lleida</span>
+              </div>
+            </div>
+            <div className="contact-card">
+              <Phone />
+              <div>
+                <small>TELÉFONO</small>
+                <a href="tel:+34973288176">973 28 81 76</a>
+                <a href={`https://wa.me/${WHATSAPP}`}>WhatsApp 616 494 155</a>
+              </div>
+            </div>
+            <div className="contact-card">
+              <Clock3 />
+              <div>
+                <small>HORARIO</small>
+                <strong>L–J 8:00–18:00</strong>
+                <span>Viernes 8:00–15:00</span>
+              </div>
+            </div>
+            <a className="btn primary" href={`https://wa.me/${WHATSAPP}`}>
+              Escribir por WhatsApp <MessageCircle />
+            </a>
+          </div>
+          <div className="map-wrap">
+            <iframe
+              title="Mapa de Solarcheck Lleida"
+              src="https://www.google.com/maps?q=Carrer%20d%27Ind%C3%ADvil%20i%20Mandoni%203%2C%2025003%20Lleida&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Carrer+d%27Ind%C3%ADvil+i+Mandoni+3%2C+25003+Lleida"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Abrir en Google Maps <ArrowRight />
+            </a>
+          </div>
+        </section>
+      </main>
+      <footer className="contact-footer">
+        <div className="footer-bottom">
+          <span>© 2026 Solarcheck Lleida</span>
+          <a href="/">Volver a la web</a>
+        </div>
+      </footer>
+      <a className="mobile-call" href="tel:+34973288176">
+        <Phone /> Llamar ahora
+      </a>
+    </>
+  );
+}
+
 function App() {
   const [menu, setMenu] = useState(false);
   const [open, setOpen] = useState(0);
   const [sent, setSent] = useState(false);
+  if (window.location.pathname.startsWith("/contacto")) {
+    return <ContactPage />;
+  }
   const submit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
@@ -151,8 +249,8 @@ function App() {
               {x}
             </a>
           ))}
-          <a className="nav-cta" href="#cita" onClick={() => setMenu(false)}>
-            Pedir cita <ArrowRight size={16} />
+          <a className="nav-cta" href="/contacto/" onClick={() => setMenu(false)}>
+            Contacto <ArrowRight size={16} />
           </a>
         </nav>
         <button
