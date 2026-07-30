@@ -77,8 +77,8 @@ svg { flex: 0 0 auto; }
 .header-main { height: 78px; background: rgba(7,62,119,.97); border-bottom: 1px solid rgba(255,255,255,.1); backdrop-filter: blur(18px); }
 .header-inner { height: 100%; display: flex; align-items: center; }
 .brand { display: flex; align-items: center; gap: 12px; min-width: 260px; }
-.brand-mark { position: relative; width: 238px; height: 52px; display: block; flex: 0 0 238px; overflow: hidden; background: white; box-shadow: 0 10px 30px rgba(5,54,110,.18); }
-.brand-mark img { position: absolute; top: 50%; left: 10px; width: 218px; max-width: none; height: auto; transform: translateY(-50%); }
+.brand-mark { position: relative; width: 224px; height: 50px; display: block; flex: 0 0 224px; overflow: hidden; }
+.brand-mark img { position: absolute; top: 50%; left: 0; width: 224px; max-width: none; height: auto; transform: translateY(-50%); }
 .brand-location { padding: 4px 7px; color: var(--blue); border: 1px solid rgba(83,175,241,.5); font-size: 8px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .desktop-nav { display: flex; align-self: stretch; align-items: stretch; justify-content: center; gap: 4px; margin: 0 auto; }
 .desktop-nav > a, .nav-group > button { position: relative; display: flex; align-items: center; gap: 6px; padding: 0 17px; color: #bec9d4; border: 0; background: none; cursor: pointer; font-size: 13px; font-weight: 650; }
@@ -368,8 +368,8 @@ svg { flex: 0 0 auto; }
 .site-footer { position: relative; color: white; background: #063565; overflow: hidden; }
 .footer-glow { position: absolute; right: 5%; bottom: -280px; width: 600px; height: 600px; border: 1px solid rgba(255,255,255,.07); border-radius: 50%; box-shadow: 0 0 0 80px transparent, 0 0 0 81px rgba(255,255,255,.05); }
 .footer-main { position: relative; display: grid; grid-template-columns: 1.4fr .75fr .75fr 1fr; gap: 6vw; padding: 85px 0 65px; }
-.footer-brand-mark { position: relative; width: 258px; height: 64px; display: block; overflow: hidden; background: white; }
-.footer-brand-mark img { position: absolute; top: 50%; left: 10px; width: 238px; max-width: none; height: auto; transform: translateY(-50%); }
+.footer-brand-mark { position: relative; width: 244px; height: 60px; display: block; overflow: hidden; }
+.footer-brand-mark img { position: absolute; top: 50%; left: 0; width: 244px; max-width: none; height: auto; transform: translateY(-50%); }
 .footer-brand p { max-width: 380px; margin: 25px 0; color: #b6c8da; font-size: 14px; }
 .footer-rating { display: inline-flex; align-items: center; gap: 10px; color: var(--blue); font-size: 11px; font-weight: 750; }
 .footer-column, .footer-contact { display: flex; flex-direction: column; align-items: flex-start; gap: 11px; }
@@ -903,8 +903,8 @@ svg { flex: 0 0 auto; }
   .utility-bar, .desktop-nav, .header-phone { display: none; }
   .site-header, .header-main { height: 82px; }
   .header-wrap { width: calc(100% - 32px); }
-  .brand-mark { width: 219px; flex-basis: 219px; }
-  .brand-mark img { width: 199px; }
+  .brand-mark { width: 208px; flex-basis: 208px; }
+  .brand-mark img { width: 208px; }
   .header-actions { margin-left: auto; }
   .header-actions .nav-cta { display: none; }
   .menu-toggle { display: grid; }
@@ -983,8 +983,8 @@ svg { flex: 0 0 auto; }
   body { font-size: 16px; padding-bottom: 65px; }
   .shell { width: calc(100% - 32px); }
   .section { padding: 78px 0; }
-  .brand-mark { width: 190px; flex-basis: 190px; height: 46px; }
-  .brand-mark img { width: 172px; }
+  .brand-mark { width: 182px; flex-basis: 182px; height: 44px; }
+  .brand-mark img { width: 182px; }
   .home-hero { padding-top: 125px; }
   .home-hero h1, .page-hero h1, .quote-copy h1 { font-size: clamp(49px,14vw,67px); }
   .home-hero-copy > p, .page-hero-copy > p { font-size: 17px; }

@@ -23,7 +23,7 @@ import {
   X,
 } from 'lucide-react';
 import {BUSINESS, normalizePath, pages, services, SITE_URL} from './site';
-import logoUrl from './assets/logo.png';
+import logoUrl from './assets/logo-negative.png';
 
 export function navigate(href) {
   const target = normalizePath(href);

@@ -6,7 +6,8 @@
     "preview": "vite preview",
     "check": "node scripts/check-site.mjs",
     "deploy": "npm run build && gh-pages -d dist",
-    "audit:contrast": "node scripts/audit-contrast.mjs"
+    "audit:contrast": "node scripts/audit-contrast.mjs",
+    "logo:negative": "node scripts/logo-negative.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

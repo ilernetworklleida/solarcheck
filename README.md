@@ -53,6 +53,20 @@ El deploy va por **rsync a Hostinger**, no por GitHub Pages: el DNS de
 Es intencionado: el 30-07-2026 una subida sin `--delete` dejó conviviendo dos versiones
 del sitio (una landing de 2 páginas encima de la web completa) y costó diagnosticarlo.
 
+## Logotipo
+
+El logo original (`src/assets/logo.png`) es azul marino + azul claro sobre transparente, así
+que sobre la cabecera azul la parte marino desaparece. La versión que usa la web es la
+**negativa** (`src/assets/logo-negative.png`): "SOLAR" en blanco y "CHECK" en el azul claro
+de la marca, sin placa blanca de fondo.
+
+```bash
+npm run logo:negative      # regenera logo-negative.png desde logo.png
+```
+
+El script solo reescribe la paleta del PNG indexado, no recomprime la imagen. Si el cliente
+manda un logo nuevo, sustituye `logo.png` y vuelve a lanzarlo.
+
 ## Sistema de color
 
 Paleta corporativa del cliente: azul de marca `--brand` sobre azul marino `--ink`.
