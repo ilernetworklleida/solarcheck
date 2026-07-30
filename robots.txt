@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://solarcheck.proposta.cat/sitemap.xml
