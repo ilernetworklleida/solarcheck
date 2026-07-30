@@ -30,7 +30,7 @@ echo "▸ 1/4 Build"
 npm run build
 
 echo "▸ 2/4 Comprobaciones del build"
-for file in index.html 404.html assets images/logo.png CNAME; do
+for file in index.html 404.html assets images CNAME; do
   [ -e "dist/${file}" ] || { echo "   ! falta dist/${file}" >&2; exit 1; }
 done
 for page in servicios laminas-solares-coche laminas-edificios clearshield-ppf trabajos \

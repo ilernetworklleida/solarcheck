@@ -23,6 +23,7 @@ import {
   X,
 } from 'lucide-react';
 import {BUSINESS, normalizePath, pages, services, SITE_URL} from './site';
+import logoUrl from './assets/logo.png';
 
 export function navigate(href) {
   const target = normalizePath(href);
@@ -165,7 +166,7 @@ export function Header({path}) {
     <div className="header-main">
       <div className="header-wrap header-inner">
         <Link href="/" className="brand" aria-label="Solarcheck Lleida, inicio" onClick={() => setMobileOpen(false)}>
-          <span className="brand-mark"><img src="/images/logo.png" alt="Solarcheck Lleida" width="390" height="200"/></span>
+          <span className="brand-mark"><img src={logoUrl} alt="Solarcheck Lleida" width="390" height="200"/></span>
           <span className="brand-location">Centro Lleida</span>
         </Link>
         <nav className="desktop-nav" aria-label="Navegación principal">
@@ -248,7 +249,7 @@ export function Footer() {
     <div className="footer-glow"/>
     <div className="shell footer-main">
       <div className="footer-brand">
-        <span className="footer-brand-mark"><img src="/images/logo.png" alt="Solarcheck Lleida" width="390" height="200"/></span>
+        <span className="footer-brand-mark"><img src={logoUrl} alt="Solarcheck Lleida" width="390" height="200"/></span>
         <p>Protección solar profesional para vehículos y edificios. Instalación especializada en Lleida desde 1998.</p>
         <a className="footer-rating" href={BUSINESS.maps} target="_blank" rel="noreferrer"><span>Centro en Lleida</span><ExternalLink size={14}/></a>
       </div>
