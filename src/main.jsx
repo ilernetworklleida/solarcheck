@@ -1,62 +1,641 @@
-import React, {useState} from 'react';
-import {createRoot} from 'react-dom/client';
-import {ArrowRight, CalendarDays, Car, Building2, ShieldCheck, Sun, Phone, MapPin, Clock3, Menu, X, Check, ChevronDown, Camera, MessageCircle} from 'lucide-react';
-import './styles.css';
+import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
+import {
+  ArrowRight,
+  CalendarDays,
+  Car,
+  Building2,
+  ShieldCheck,
+  Sun,
+  Phone,
+  MapPin,
+  Clock3,
+  Menu,
+  X,
+  Check,
+  ChevronDown,
+  Camera,
+  MessageCircle,
+} from "lucide-react";
+import "./styles.css";
 
-const PHONE='973 28 81 76';
-const WHATSAPP='34616494155';
-const projects=[
- ['/images/work-mercedes-estate.webp','Mercedes-Benz','Làmina solar · Acabat premium'],
- ['/images/work-audi-a7.webp','Audi A7','Protecció i privacitat'],
- ['/images/work-ford-ranger.webp','Ford Ranger','Confort per a cada trajecte'],
- ['/images/work-audi-a3.webp','Audi A3','Instal·lació professional'],
- ['/images/work-bmw-x4.webp','BMW X4','Precisió ComputerCut'],
- ['/images/work-mercedes-coupe.webp','Mercedes-Benz Coupé','Rebuig UV del 99%']
+const PHONE = "973 28 81 76";
+const WHATSAPP = "34616494155";
+const projects = [
+  [
+    "/images/work-mercedes-estate.webp",
+    "Mercedes-Benz",
+    "Làmina solar · Acabat premium",
+  ],
+  ["/images/work-audi-a7.webp", "Audi A7", "Protecció i privacitat"],
+  [
+    "/images/work-ford-ranger.webp",
+    "Ford Ranger",
+    "Confort per a cada trajecte",
+  ],
+  ["/images/work-audi-a3.webp", "Audi A3", "Instal·lació professional"],
+  ["/images/work-bmw-x4.webp", "BMW X4", "Precisió ComputerCut"],
+  [
+    "/images/work-mercedes-coupe.webp",
+    "Mercedes-Benz Coupé",
+    "Rebuig UV del 99%",
+  ],
 ];
-const services=[
-  {n:'01',icon:Car,title:'Automóvil',tag:'Confort · Estética · Privacidad',copy:'Láminas homologadas de alto rendimiento, cortadas a medida para tu vehículo.',image:'/images/hero-car.jpg',href:'#automovil'},
-  {n:'02',icon:Building2,title:'Edificios',tag:'Ahorro · Protección · Bienestar',copy:'Reduce el calor, los reflejos y el consumo energético sin cambiar tus cristales.',image:'/images/building.jpg',href:'#edificios'},
-  {n:'03',icon:ShieldCheck,title:'Clearshield®',tag:'Protección de pintura',copy:'Una barrera prácticamente invisible frente a piedras, roces, insectos y arañazos.',image:'/images/paint.jpg',href:'#clearshield'}
+const services = [
+  {
+    n: "01",
+    icon: Car,
+    title: "Automóvil",
+    tag: "Confort · Estética · Privacidad",
+    copy: "Láminas homologadas de alto rendimiento, cortadas a medida para tu vehículo.",
+    image: "/images/stock-tinted-car.jpg",
+    href: "#automovil",
+  },
+  {
+    n: "02",
+    icon: Building2,
+    title: "Edificios",
+    tag: "Ahorro · Protección · Bienestar",
+    copy: "Reduce el calor, los reflejos y el consumo energético sin cambiar tus cristales.",
+    image: "/images/stock-glass-building.jpg",
+    href: "#edificios",
+  },
+  {
+    n: "03",
+    icon: ShieldCheck,
+    title: "Clearshield®",
+    tag: "Protección de pintura",
+    copy: "Una barrera prácticamente invisible frente a piedras, roces, insectos y arañazos.",
+    image: "/images/paint.jpg",
+    href: "#clearshield",
+  },
 ];
-const films=[
-  {name:'Supreme',label:'Protección esencial',heat:'39%',tones:'1 tono',desc:'La opción inteligente para ganar estética, intimidad y protección a un precio accesible.'},
-  {name:'HP Supreme',label:'Alta protección',heat:'58%',tones:'3 tonos',desc:'Confort extra para plazas posteriores y familias que pasan tiempo en carretera.',popular:true},
-  {name:'HP Quantum',label:'Máxima protección',heat:'63%',tones:'2 tonos',desc:'Alto rendimiento térmico y un acabado sofisticado para vehículos exigentes.'},
-  {name:'UP Supreme',label:'Ultra protección IR',heat:'83%',tones:'2 tonos',desc:'Tecnología sin metales para el máximo rechazo infrarrojo sin interferencias.'}
+const films = [
+  {
+    name: "Supreme",
+    label: "Protección esencial",
+    heat: "39%",
+    tones: "1 tono",
+    desc: "La opción inteligente para ganar estética, intimidad y protección a un precio accesible.",
+  },
+  {
+    name: "HP Supreme",
+    label: "Alta protección",
+    heat: "58%",
+    tones: "3 tonos",
+    desc: "Confort extra para plazas posteriores y familias que pasan tiempo en carretera.",
+    popular: true,
+  },
+  {
+    name: "HP Quantum",
+    label: "Máxima protección",
+    heat: "63%",
+    tones: "2 tonos",
+    desc: "Alto rendimiento térmico y un acabado sofisticado para vehículos exigentes.",
+  },
+  {
+    name: "UP Supreme",
+    label: "Ultra protección IR",
+    heat: "83%",
+    tones: "2 tonos",
+    desc: "Tecnología sin metales para el máximo rechazo infrarrojo sin interferencias.",
+  },
 ];
-const faqs=[
- ['¿Cuánto tarda la instalación?','La mayoría de instalaciones para automóvil se completan en el mismo día. Te confirmaremos el tiempo exacto según el modelo y el trabajo.'],
- ['¿Las láminas están homologadas?','Sí. Trabajamos con láminas Solarcheck® de alta calidad y entregamos la documentación correspondiente a la instalación.'],
- ['¿Puedo pedir presupuesto sin compromiso?','Claro. Cuéntanos el vehículo o las dimensiones aproximadas de los cristales y te orientaremos antes de reservar.'],
- ['¿También trabajáis para empresas?','Sí. Instalamos soluciones para oficinas, comercios, industria y grandes superficies acristaladas.']
+const faqs = [
+  [
+    "¿Cuánto tarda la instalación?",
+    "La mayoría de instalaciones para automóvil se completan en el mismo día. Te confirmaremos el tiempo exacto según el modelo y el trabajo.",
+  ],
+  [
+    "¿Las láminas están homologadas?",
+    "Sí. Trabajamos con láminas Solarcheck® de alta calidad y entregamos la documentación correspondiente a la instalación.",
+  ],
+  [
+    "¿Puedo pedir presupuesto sin compromiso?",
+    "Claro. Cuéntanos el vehículo o las dimensiones aproximadas de los cristales y te orientaremos antes de reservar.",
+  ],
+  [
+    "¿También trabajáis para empresas?",
+    "Sí. Instalamos soluciones para oficinas, comercios, industria y grandes superficies acristaladas.",
+  ],
 ];
 
-function App(){
- const [menu,setMenu]=useState(false); const [open,setOpen]=useState(0); const [sent,setSent]=useState(false);
- const submit=e=>{e.preventDefault();const data=new FormData(e.currentTarget);const msg=`Hola Solarcheck Lleida! Sóc ${data.get('name')}. Voldria informació per a ${data.get('project')||'una instal·lació de làmines solars'}. Telèfon: ${data.get('phone')}. ${data.get('details')||''}`;window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,'_blank','noopener');setSent(true)};
- return <>
-  <header><a className="brand" href="#inicio"><img src="/images/logo.png" alt="Solarcheck Lleida"/></a><nav className={menu?'open':''}>{['Servicios','Automóvil','Edificios','Empresa'].map(x=><a key={x} href={'#'+x.toLowerCase().replace('ó','o')} onClick={()=>setMenu(false)}>{x}</a>)}<a className="nav-cta" href="#cita" onClick={()=>setMenu(false)}>Pedir cita <ArrowRight size={16}/></a></nav><button className="menu" onClick={()=>setMenu(!menu)} aria-label="Abrir menú">{menu?<X/>:<Menu/>}</button></header>
-  <main>
-   <section className="hero" id="inicio"><div className="hero-bg"/><div className="hero-shade"/><div className="hero-copy"><div className="eyebrow"><span/> ESPECIALISTAS DESDE 1998 · LLEIDA</div><h1>Tu espacio.<br/>Tu vehículo.<br/><em>Sin límites.</em></h1><p>Protección solar de precisión para quienes no quieren elegir entre confort, estética y seguridad.</p><div className="hero-actions"><a className="btn primary" href="#cita">Pide tu cita <ArrowRight/></a><a className="btn ghost" href="#servicios">Descubre las soluciones</a></div></div><div className="hero-stats"><div><strong>+25</strong><span>años de experiencia</span></div><div><strong>99%</strong><span>de rayos UV rechazados</span></div><div><strong>1 día</strong><span>instalación habitual</span></div></div><div className="scroll">DESLIZA <span/></div></section>
+function App() {
+  const [menu, setMenu] = useState(false);
+  const [open, setOpen] = useState(0);
+  const [sent, setSent] = useState(false);
+  const submit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const msg = `Hola Solarcheck Lleida! Sóc ${data.get("name")}. Voldria informació per a ${data.get("project") || "una instal·lació de làmines solars"}. Telèfon: ${data.get("phone")}. ${data.get("details") || ""}`;
+    window.open(
+      `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,
+      "_blank",
+      "noopener",
+    );
+    setSent(true);
+  };
+  return (
+    <>
+      <header>
+        <a className="brand" href="#inicio">
+          <img src="/images/logo.png" alt="Solarcheck Lleida" />
+        </a>
+        <nav className={menu ? "open" : ""}>
+          {["Servicios", "Automóvil", "Edificios", "Empresa"].map((x) => (
+            <a
+              key={x}
+              href={"#" + x.toLowerCase().replace("ó", "o")}
+              onClick={() => setMenu(false)}
+            >
+              {x}
+            </a>
+          ))}
+          <a className="nav-cta" href="#cita" onClick={() => setMenu(false)}>
+            Pedir cita <ArrowRight size={16} />
+          </a>
+        </nav>
+        <button
+          className="menu"
+          onClick={() => setMenu(!menu)}
+          aria-label="Abrir menú"
+        >
+          {menu ? <X /> : <Menu />}
+        </button>
+      </header>
+      <main>
+        <section className="hero" id="inicio">
+          <div className="hero-bg" />
+          <div className="hero-shade" />
+          <div className="hero-copy">
+            <div className="eyebrow">
+              <span /> ESPECIALISTAS DESDE 1998 · LLEIDA
+            </div>
+            <h1>
+              Tu espacio.
+              <br />
+              Tu vehículo.
+              <br />
+              <em>Sin límites.</em>
+            </h1>
+            <p>
+              Protección solar de precisión para quienes no quieren elegir entre
+              confort, estética y seguridad.
+            </p>
+            <div className="hero-actions">
+              <a className="btn primary" href="#cita">
+                Pide tu cita <ArrowRight />
+              </a>
+              <a className="btn ghost" href="#servicios">
+                Descubre las soluciones
+              </a>
+            </div>
+          </div>
+          <div className="hero-stats">
+            <div>
+              <strong>+25</strong>
+              <span>años de experiencia</span>
+            </div>
+            <div>
+              <strong>99%</strong>
+              <span>de rayos UV rechazados</span>
+            </div>
+            <div>
+              <strong>1 día</strong>
+              <span>instalación habitual</span>
+            </div>
+          </div>
+          <div className="scroll">
+            DESLIZA <span />
+          </div>
+        </section>
 
-   <section className="intro" id="servicios"><div className="section-kicker">SOLUCIONES SOLARCHECK®</div><div className="intro-grid"><h2>Menos calor.<br/><em>Más vida.</em></h2><p>Transformamos el cristal en una barrera de alto rendimiento. Soluciones instaladas por especialistas para conducir, vivir y trabajar mejor.</p></div><div className="service-grid">{services.map((s,i)=><a className="service" href={s.href} key={s.title}><img src={s.image} alt=""/><div className="service-overlay"/><span className="service-num">{s.n}</span><div className="service-body"><s.icon/><small>{s.tag}</small><h3>{s.title}</h3><p>{s.copy}</p><span className="more">Explorar solución <ArrowRight/></span></div></a>)}</div></section>
+        <section className="intro" id="servicios">
+          <div className="section-kicker">SOLUCIONES SOLARCHECK®</div>
+          <div className="intro-grid">
+            <h2>
+              Menos calor.
+              <br />
+              <em>Más vida.</em>
+            </h2>
+            <p>
+              Transformamos el cristal en una barrera de alto rendimiento.
+              Soluciones instaladas por especialistas para conducir, vivir y
+              trabajar mejor.
+            </p>
+          </div>
+          <div className="service-grid">
+            {services.map((s, i) => (
+              <a className="service" href={s.href} key={s.title}>
+                <img src={s.image} alt="" />
+                <div className="service-overlay" />
+                <span className="service-num">{s.n}</span>
+                <div className="service-body">
+                  <s.icon />
+                  <small>{s.tag}</small>
+                  <h3>{s.title}</h3>
+                  <p>{s.copy}</p>
+                  <span className="more">
+                    Explorar solución <ArrowRight />
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
 
-   <section className="automotive" id="automovil"><div className="auto-visual"><img src="/images/detail.jpg" alt="Instalación profesional de lámina Solarcheck"/><div className="tech-chip"><Sun/><div><strong>ComputerCut</strong><span>Corte exacto. Cero riesgo.</span></div></div></div><div className="auto-copy"><div className="section-kicker">AUTOMÓVIL</div><h2>Control solar.<br/><em>A tu medida.</em></h2><p className="lead">Cada coche y cada conductor son distintos. Elige el equilibrio perfecto entre protección térmica, tonalidad y presupuesto.</p><div className="film-list">{films.map((f,i)=><div className={'film '+(f.popular?'active':'')} key={f.name}><div className="film-top"><span className="film-index">0{i+1}</span><div><h3>{f.name}</h3><small>{f.label}</small></div>{f.popular&&<b>MÁS ELEGIDA</b>}<span className="film-heat">{f.heat}<small>PROTECCIÓN</small></span></div><div className="film-detail"><p>{f.desc}</p><span><Check/> UV 99%</span><span><Check/> {f.tones}</span><span><Check/> Garantía nominal ilimitada</span></div></div>)}</div><a className="text-link" href="#cita">No sé cuál elegir — asesoradme <ArrowRight/></a></div></section>
+        <section className="automotive" id="automovil">
+          <div className="auto-visual">
+            <img
+              src="/images/stock-tinted-car.jpg"
+              alt="Vehículo premium con lunas tintadas"
+            />
+            <div className="tech-chip">
+              <Sun />
+              <div>
+                <strong>ComputerCut</strong>
+                <span>Corte exacto. Cero riesgo.</span>
+              </div>
+            </div>
+          </div>
+          <div className="auto-copy">
+            <div className="section-kicker">AUTOMÓVIL</div>
+            <h2>
+              Control solar.
+              <br />
+              <em>A tu medida.</em>
+            </h2>
+            <p className="lead">
+              Cada coche y cada conductor son distintos. Elige el equilibrio
+              perfecto entre protección térmica, tonalidad y presupuesto.
+            </p>
+            <div className="film-list">
+              {films.map((f, i) => (
+                <div
+                  className={"film " + (f.popular ? "active" : "")}
+                  key={f.name}
+                >
+                  <div className="film-top">
+                    <span className="film-index">0{i + 1}</span>
+                    <div>
+                      <h3>{f.name}</h3>
+                      <small>{f.label}</small>
+                    </div>
+                    {f.popular && <b>MÁS ELEGIDA</b>}
+                    <span className="film-heat">
+                      {f.heat}
+                      <small>PROTECCIÓN</small>
+                    </span>
+                  </div>
+                  <div className="film-detail">
+                    <p>{f.desc}</p>
+                    <span>
+                      <Check /> UV 99%
+                    </span>
+                    <span>
+                      <Check /> {f.tones}
+                    </span>
+                    <span>
+                      <Check /> Garantía nominal ilimitada
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <a className="text-link" href="#cita">
+              No sé cuál elegir — asesoradme <ArrowRight />
+            </a>
+          </div>
+        </section>
 
-   <section className="building" id="edificios"><div className="building-bg"/><div className="building-content"><div className="section-kicker light">EDIFICIOS</div><h2>El mejor clima<br/>empieza en <em>el cristal.</em></h2><p>Láminas que rechazan hasta el 85% de la energía solar. Más confort y menos consumo, sin obras ni sustitución de ventanas.</p><div className="benefits"><div><strong>85%</strong><span>rechazo solar</span></div><div><strong>99%</strong><span>filtro UV</span></div><div><strong>0</strong><span>obras</span></div></div><a className="btn light-btn" href="#cita">Estudiar mi proyecto <ArrowRight/></a></div></section>
+        <section className="building" id="edificios">
+          <div className="building-bg" />
+          <div className="building-content">
+            <div className="section-kicker light">EDIFICIOS</div>
+            <h2>
+              El mejor clima
+              <br />
+              empieza en <em>el cristal.</em>
+            </h2>
+            <p>
+              Láminas que rechazan hasta el 85% de la energía solar. Más confort
+              y menos consumo, sin obras ni sustitución de ventanas.
+            </p>
+            <div className="benefits">
+              <div>
+                <strong>85%</strong>
+                <span>rechazo solar</span>
+              </div>
+              <div>
+                <strong>99%</strong>
+                <span>filtro UV</span>
+              </div>
+              <div>
+                <strong>0</strong>
+                <span>obras</span>
+              </div>
+            </div>
+            <a className="btn light-btn" href="#cita">
+              Estudiar mi proyecto <ArrowRight />
+            </a>
+          </div>
+        </section>
 
-   <section className="clear" id="clearshield"><div className="clear-copy"><div className="section-kicker">CLEARSHIELD®</div><h2>La protección<br/>que <em>no se ve.</em></h2><p>Película de poliuretano transparente para conservar la pintura como el primer día. Diseñada para resistir impactos, abrasión y exposición solar.</p><ul>{['No amarillea ni altera el color','Plantillas específicas por marca y modelo','Lavado y mantenimiento como siempre','Ideal para coches, motos y vehículos 4×4'].map(x=><li key={x}><Check/>{x}</li>)}</ul><a className="btn dark-btn" href="#cita">Quiero proteger mi vehículo <ArrowRight/></a></div><div className="clear-image"><img src="/images/paint.jpg" alt="Protección transparente Clearshield para carrocería"/><span>PPF · PAINT PROTECTION FILM</span></div></section>
+        <section className="clear" id="clearshield">
+          <div className="clear-copy">
+            <div className="section-kicker">CLEARSHIELD®</div>
+            <h2>
+              La protección
+              <br />
+              que <em>no se ve.</em>
+            </h2>
+            <p>
+              Película de poliuretano transparente para conservar la pintura
+              como el primer día. Diseñada para resistir impactos, abrasión y
+              exposición solar.
+            </p>
+            <ul>
+              {[
+                "No amarillea ni altera el color",
+                "Plantillas específicas por marca y modelo",
+                "Lavado y mantenimiento como siempre",
+                "Ideal para coches, motos y vehículos 4×4",
+              ].map((x) => (
+                <li key={x}>
+                  <Check />
+                  {x}
+                </li>
+              ))}
+            </ul>
+            <a className="btn dark-btn" href="#cita">
+              Quiero proteger mi vehículo <ArrowRight />
+            </a>
+          </div>
+          <div className="clear-image">
+            <img
+              src="/images/paint.jpg"
+              alt="Protección transparente Clearshield para carrocería"
+            />
+            <span>PPF · PAINT PROTECTION FILM</span>
+          </div>
+        </section>
 
-   <section className="projects"><div className="projects-head"><div><div className="section-kicker light">TREBALLS REALS · LLEIDA</div><h2>No prometemos<br/>un acabado impecable.<br/><em>Lo enseñamos.</em></h2></div><p>Vehículos reales tratados en nuestro centro. Cada cristal se prepara, corta e instala con precisión para integrarse perfectamente en el diseño original.</p></div><div className="project-grid">{projects.map((p,i)=><figure key={p[0]} className={i===0?'featured':''}><img src={p[0]} alt={`${p[1]} con láminas solares instaladas en Solarcheck Lleida`}/><figcaption><span>0{i+1}</span><div><strong>{p[1]}</strong><small>{p[2]}</small></div></figcaption></figure>)}</div></section>
+        <section className="projects">
+          <div className="projects-head">
+            <div>
+              <div className="section-kicker light">
+                TREBALLS REALS · LLEIDA
+              </div>
+              <h2>
+                No prometemos
+                <br />
+                un acabado impecable.
+                <br />
+                <em>Lo enseñamos.</em>
+              </h2>
+            </div>
+            <p>
+              Vehículos reales tratados en nuestro centro. Cada cristal se
+              prepara, corta e instala con precisión para integrarse
+              perfectamente en el diseño original.
+            </p>
+          </div>
+          <div className="project-grid">
+            {projects.map((p, i) => (
+              <figure key={p[0]} className={i === 0 ? "featured" : ""}>
+                <img
+                  src={p[0]}
+                  alt={`${p[1]} con láminas solares instaladas en Solarcheck Lleida`}
+                />
+                <figcaption>
+                  <span>0{i + 1}</span>
+                  <div>
+                    <strong>{p[1]}</strong>
+                    <small>{p[2]}</small>
+                  </div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
 
-   <section className="trust" id="empresa"><div><div className="section-kicker">SOLARCHECK LLEIDA</div><h2>Oficio, precisión<br/>y <em>25 años de confianza.</em></h2></div><div className="trust-copy"><p>Desde 1998 nos dedicamos exclusivamente a instalar soluciones de protección solar. Nuestro equipo se forma continuamente y trabaja con corte computerizado para conseguir un acabado impecable.</p><div className="trust-points"><span><ShieldCheck/>Producto de alta calidad</span><span><ShieldCheck/>Instaladores especializados</span><span><ShieldCheck/>Trabajo limpio y sin desmontajes</span><span><ShieldCheck/>Asesoramiento honesto</span></div></div></section>
+        <section className="trust" id="empresa">
+          <div>
+            <div className="section-kicker">SOLARCHECK LLEIDA</div>
+            <h2>
+              Oficio, precisión
+              <br />y <em>25 años de confianza.</em>
+            </h2>
+          </div>
+          <div className="trust-copy">
+            <p>
+              Desde 1998 nos dedicamos exclusivamente a instalar soluciones de
+              protección solar. Nuestro equipo se forma continuamente y trabaja
+              con corte computerizado para conseguir un acabado impecable.
+            </p>
+            <div className="trust-points">
+              <span>
+                <ShieldCheck />
+                Producto de alta calidad
+              </span>
+              <span>
+                <ShieldCheck />
+                Instaladores especializados
+              </span>
+              <span>
+                <ShieldCheck />
+                Trabajo limpio y sin desmontajes
+              </span>
+              <span>
+                <ShieldCheck />
+                Asesoramiento honesto
+              </span>
+            </div>
+          </div>
+        </section>
 
-   <section className="booking" id="cita"><div className="booking-info"><div className="section-kicker light">HABLEMOS</div><h2>Tu próxima<br/>mejora empieza <em>aquí.</em></h2><p>Cuéntanos qué necesitas. Te responderemos con una recomendación clara y un presupuesto sin compromiso.</p><div className="contact-row"><Phone/><div><small>LLÁMANOS</small><a href="tel:+34973288176">{PHONE}</a></div></div><div className="contact-row"><MessageCircle/><div><small>WHATSAPP</small><a href={`https://wa.me/${WHATSAPP}`}>616 494 155</a></div></div><div className="contact-row"><MapPin/><div><small>VISÍTANOS</small><span>C/ Indívil i Mandoni, 3 · 25003 Lleida</span></div></div><div className="contact-row"><Clock3/><div><small>HORARIO</small><span>L–J 8:00–18:00 · V 8:00–15:00</span></div></div></div><form onSubmit={submit}>{sent?<div className="success"><MessageCircle/><h3>¡Mensaje preparado!</h3><p>Se ha abierto WhatsApp con tu solicitud. Solo falta pulsar enviar para hablar directamente con Solarcheck Lleida.</p><button type="button" onClick={()=>setSent(false)}>Preparar otra consulta</button></div>:<><div className="form-head"><CalendarDays/><div><small>SOLICITUD DE CITA</small><h3>¿Qué quieres proteger?</h3></div></div><div className="choice"><label><input type="radio" name="type" defaultChecked/><span><Car/> Mi vehículo</span></label><label><input type="radio" name="type"/><span><Building2/> Un edificio</span></label></div><div className="fields"><label>Nombre y apellidos<input name="name" required placeholder="Tu nombre"/></label><label>Teléfono<input name="phone" required type="tel" placeholder="600 000 000"/></label><label>Email<input name="email" type="email" placeholder="tu@email.com"/></label><label>Vehículo / proyecto<input name="project" placeholder="Marca, modelo o tipo de espacio"/></label><label className="wide">Cuéntanos un poco más<textarea name="details" rows="3" placeholder="¿Qué necesitas?"/></label></div><button className="submit">Continuar por WhatsApp <MessageCircle/></button><small className="privacy">Sin esperas ni formularios perdidos: hablarás directamente con el centro.</small></>}</form></section>
+        <section className="booking" id="cita">
+          <div className="booking-info">
+            <div className="section-kicker light">HABLEMOS</div>
+            <h2>
+              Tu próxima
+              <br />
+              mejora empieza <em>aquí.</em>
+            </h2>
+            <p>
+              Cuéntanos qué necesitas. Te responderemos con una recomendación
+              clara y un presupuesto sin compromiso.
+            </p>
+            <div className="contact-row">
+              <Phone />
+              <div>
+                <small>LLÁMANOS</small>
+                <a href="tel:+34973288176">{PHONE}</a>
+              </div>
+            </div>
+            <div className="contact-row">
+              <MessageCircle />
+              <div>
+                <small>WHATSAPP</small>
+                <a href={`https://wa.me/${WHATSAPP}`}>616 494 155</a>
+              </div>
+            </div>
+            <div className="contact-row">
+              <MapPin />
+              <div>
+                <small>VISÍTANOS</small>
+                <span>C/ Indívil i Mandoni, 3 · 25003 Lleida</span>
+              </div>
+            </div>
+            <div className="contact-row">
+              <Clock3 />
+              <div>
+                <small>HORARIO</small>
+                <span>L–J 8:00–18:00 · V 8:00–15:00</span>
+              </div>
+            </div>
+          </div>
+          <form onSubmit={submit}>
+            {sent ? (
+              <div className="success">
+                <MessageCircle />
+                <h3>¡Mensaje preparado!</h3>
+                <p>
+                  Se ha abierto WhatsApp con tu solicitud. Solo falta pulsar
+                  enviar para hablar directamente con Solarcheck Lleida.
+                </p>
+                <button type="button" onClick={() => setSent(false)}>
+                  Preparar otra consulta
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="form-head">
+                  <CalendarDays />
+                  <div>
+                    <small>SOLICITUD DE CITA</small>
+                    <h3>¿Qué quieres proteger?</h3>
+                  </div>
+                </div>
+                <div className="choice">
+                  <label>
+                    <input type="radio" name="type" defaultChecked />
+                    <span>
+                      <Car /> Mi vehículo
+                    </span>
+                  </label>
+                  <label>
+                    <input type="radio" name="type" />
+                    <span>
+                      <Building2 /> Un edificio
+                    </span>
+                  </label>
+                </div>
+                <div className="fields">
+                  <label>
+                    Nombre y apellidos
+                    <input name="name" required placeholder="Tu nombre" />
+                  </label>
+                  <label>
+                    Teléfono
+                    <input
+                      name="phone"
+                      required
+                      type="tel"
+                      placeholder="600 000 000"
+                    />
+                  </label>
+                  <label>
+                    Email
+                    <input
+                      name="email"
+                      type="email"
+                      placeholder="tu@email.com"
+                    />
+                  </label>
+                  <label>
+                    Vehículo / proyecto
+                    <input
+                      name="project"
+                      placeholder="Marca, modelo o tipo de espacio"
+                    />
+                  </label>
+                  <label className="wide">
+                    Cuéntanos un poco más
+                    <textarea
+                      name="details"
+                      rows="3"
+                      placeholder="¿Qué necesitas?"
+                    />
+                  </label>
+                </div>
+                <button className="submit">
+                  Continuar por WhatsApp <MessageCircle />
+                </button>
+                <small className="privacy">
+                  Sin esperas ni formularios perdidos: hablarás directamente con
+                  el centro.
+                </small>
+              </>
+            )}
+          </form>
+        </section>
 
-   <section className="faq"><div><div className="section-kicker">PREGUNTAS FRECUENTES</div><h2>Antes de dar<br/><em>el paso.</em></h2></div><div>{faqs.map((f,i)=><button className={'faq-item '+(open===i?'open':'')} onClick={()=>setOpen(open===i?-1:i)} key={f[0]}><span><b>0{i+1}</b>{f[0]}<ChevronDown/></span><p>{f[1]}</p></button>)}</div></section>
-  </main>
-  <footer><div className="footer-top"><img src="/images/logo.png" alt="Solarcheck Lleida"/><p>Protección solar profesional<br/>para automóviles y edificios.</p><a href="#cita">PIDE TU CITA <ArrowRight/></a></div><div className="footer-bottom"><span>© 2026 Solarcheck Lleida</span><div><a href="#">Aviso legal</a><a href="#">Privacidad</a><a href="#">Cookies</a></div><a href="https://instagram.com" aria-label="Instagram"><Camera/></a></div></footer>
-  <a className="mobile-call" href="tel:+34973288176"><Phone/> Llamar ahora</a>
- </>
+        <section className="faq">
+          <div>
+            <div className="section-kicker">PREGUNTAS FRECUENTES</div>
+            <h2>
+              Antes de dar
+              <br />
+              <em>el paso.</em>
+            </h2>
+          </div>
+          <div>
+            {faqs.map((f, i) => (
+              <button
+                className={"faq-item " + (open === i ? "open" : "")}
+                onClick={() => setOpen(open === i ? -1 : i)}
+                key={f[0]}
+              >
+                <span>
+                  <b>0{i + 1}</b>
+                  {f[0]}
+                  <ChevronDown />
+                </span>
+                <p>{f[1]}</p>
+              </button>
+            ))}
+          </div>
+        </section>
+      </main>
+      <footer>
+        <div className="footer-top">
+          <img src="/images/logo.png" alt="Solarcheck Lleida" />
+          <p>
+            Protección solar profesional
+            <br />
+            para automóviles y edificios.
+          </p>
+          <a href="#cita">
+            PIDE TU CITA <ArrowRight />
+          </a>
+        </div>
+        <div className="footer-bottom">
+          <span>© 2026 Solarcheck Lleida</span>
+          <div>
+            <a href="#">Aviso legal</a>
+            <a href="#">Privacidad</a>
+            <a href="#">Cookies</a>
+          </div>
+          <a href="https://instagram.com" aria-label="Instagram">
+            <Camera />
+          </a>
+        </div>
+      </footer>
+      <a className="mobile-call" href="tel:+34973288176">
+        <Phone /> Llamar ahora
+      </a>
+    </>
+  );
 }
-createRoot(document.getElementById('root')).render(<App/>);
+createRoot(document.getElementById("root")).render(<App />);
