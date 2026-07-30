@@ -223,11 +223,14 @@ svg { flex: 0 0 auto; }
 .hero-slide-tabs button i { position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: var(--brand); transform: scaleX(0); transform-origin: left; transition: transform .35s; }
 .hero-slide-tabs button.active { color: white; border-color: #47596b; background: #0e559c; }
 .hero-slide-tabs button.active i { transform: scaleX(1); }
-.hero-ticker { position: absolute; right: 0; bottom: 0; left: 0; height: 43px; overflow: hidden; color: #8599ad; border-top: 1px solid rgba(255,255,255,.09); background: rgba(0,0,0,.15); }
-.hero-ticker div { width: max-content; height: 100%; display: flex; align-items: center; gap: 34px; padding-left: 4vw; animation: ticker 25s linear infinite; }
-.hero-ticker span { font-size: 9px; font-weight: 700; letter-spacing: .17em; }
-.hero-ticker i { width: 5px; height: 5px; border-radius: 50%; background: var(--brand); }
-@keyframes ticker { to { transform: translateX(-45%); } }
+.hero-ticker { position: absolute; right: 0; bottom: 0; left: 0; height: 56px; overflow: hidden; color: #d8e9fa; border-top: 1px solid rgba(255,255,255,.14); background: rgba(0,40,86,.62); }
+.hero-ticker-track { width: max-content; height: 100%; display: flex; animation: ticker 36s linear infinite; will-change: transform; }
+.hero-ticker-group { height: 100%; display: flex; flex: 0 0 auto; align-items: center; gap: 34px; padding-right: 34px; }
+.hero-ticker a { font-size: 13px; font-weight: 800; letter-spacing: .14em; white-space: nowrap; transition: color .2s; }
+.hero-ticker a:hover, .hero-ticker a:focus-visible { color: white; text-decoration: underline; text-underline-offset: 5px; }
+.hero-ticker i { width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: var(--brand); }
+.hero-ticker:hover .hero-ticker-track, .hero-ticker:focus-within .hero-ticker-track { animation-play-state: paused; }
+@keyframes ticker { to { transform: translateX(-50%); } }
 
 .proof-bar { color: white; background: var(--ink-2); border-top: 1px solid #356697; }
 .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); }

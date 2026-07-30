@@ -53,6 +53,15 @@ import {
   SectionHeading,
   Seo,
 } from './components';
+
+const heroTickerItems = [
+  {label: 'TINTADO DE LUNAS', href: '/laminas-solares-coche/'},
+  {label: 'LÁMINAS PARA EDIFICIOS', href: '/laminas-edificios/'},
+  {label: 'PROTECCIÓN PPF CLEARSHIELD', href: '/clearshield-ppf/'},
+  {label: 'TRABAJOS REALES', href: '/trabajos/'},
+  {label: 'CENTRO SOLARCHECK LLEIDA', href: '/empresa/'},
+  {label: 'PEDIR PRESUPUESTO', href: '/presupuesto/'},
+];
 import {BUSINESS, faqs, projects, services, SITE_URL} from './site';
 
 const ButtonPair = ({primary = '/presupuesto/', primaryLabel = 'Pedir presupuesto', secondary = '/trabajos/', secondaryLabel = 'Ver trabajos'}) => <div className="button-pair">
@@ -170,7 +179,15 @@ function HomeHero() {
       </div>
     </div>
     <p className="sr-only" aria-live="polite">Slide {active + 1} de {homeHeroSlides.length}: {slide.nav}</p>
-    <div className="hero-ticker"><div><span>AUTOMÓVIL</span><i/> <span>EDIFICIOS</span><i/> <span>PPF CLEARSHIELD</span><i/> <span>COMPUTERCUT</span><i/> <span>LLEIDA</span><i/> <span>AUTOMÓVIL</span><i/> <span>EDIFICIOS</span><i/> <span>PPF CLEARSHIELD</span></div></div>
+    <div className="hero-ticker" aria-label="Accesos rápidos a nuestras soluciones">
+      <div className="hero-ticker-track">
+        {[0, 1].map((copy) => <div className="hero-ticker-group" key={copy} aria-hidden={copy === 1 || undefined}>
+          {heroTickerItems.map((item) => <React.Fragment key={`${copy}-${item.href}`}>
+            <Link href={item.href}>{item.label}</Link><i aria-hidden="true"/>
+          </React.Fragment>)}
+        </div>)}
+      </div>
+    </div>
   </section>;
 }
 
