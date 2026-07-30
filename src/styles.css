@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
 :root {
-  --ink: #0b1d31;
+  --ink: #002856;
   --orange: #002856;
   --cream: #f3f4f2;
   --line: #d6dce2;
@@ -103,11 +103,11 @@ nav > a:hover {
   background:
     linear-gradient(
       90deg,
-      rgba(3, 11, 13, 0.95) 0%,
-      rgba(3, 11, 13, 0.7) 44%,
-      rgba(3, 11, 13, 0.12) 75%
+      rgba(0, 40, 86, 0.95) 0%,
+      rgba(0, 40, 86, 0.72) 44%,
+      rgba(0, 40, 86, 0.14) 75%
     ),
-    linear-gradient(0deg, rgba(2, 8, 10, 0.7), transparent 45%);
+    linear-gradient(0deg, rgba(0, 40, 86, 0.72), transparent 45%);
 }
 .hero-copy {
   position: relative;
@@ -258,7 +258,7 @@ h1 {
 .service-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, #071214ef 0%, transparent 70%);
+  background: linear-gradient(0deg, #002856f2 0%, transparent 70%);
 }
 .service-num {
   position: absolute;
@@ -778,7 +778,7 @@ form {
   transform: rotate(180deg);
 }
 footer {
-  background: #001b3b;
+  background: #002856;
   color: white;
   padding: 55px 7vw 30px;
 }
@@ -845,7 +845,7 @@ footer {
     top: 0;
     left: 0;
     right: 0;
-    background: #071214;
+    background: #002856;
     padding: 90px 25px 30px;
     flex-direction: column;
     align-items: stretch;
@@ -862,8 +862,8 @@ footer {
   }
   .hero-shade {
     background:
-      linear-gradient(90deg, rgba(3, 11, 13, 0.93), rgba(3, 11, 13, 0.38)),
-      linear-gradient(0deg, #030b0de8, transparent);
+      linear-gradient(90deg, rgba(0, 40, 86, 0.94), rgba(0, 40, 86, 0.4)),
+      linear-gradient(0deg, #002856e8, transparent);
   }
   .hero-copy > p {
     font-size: 17px;
@@ -1049,7 +1049,7 @@ footer {
   position: relative;
   height: 390px;
   overflow: hidden;
-  background: #162326;
+  background: #002856;
 }
 .project-grid figure.featured {
   grid-column: span 2;
@@ -1069,7 +1069,7 @@ footer {
   right: 0;
   bottom: 0;
   padding: 55px 22px 20px;
-  background: linear-gradient(transparent, #071012eb);
+  background: linear-gradient(transparent, #002856f0);
   display: flex;
   gap: 14px;
   align-items: end;
