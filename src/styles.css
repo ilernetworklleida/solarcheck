@@ -29,7 +29,7 @@
 .proof-bar, .flip-front, .flip-back, .site-footer, .page-hero, .quote-page-hero, .legal-hero,
 .not-found, .mobile-panel, .finder-result, .film-panel, .building-metrics, .config-result,
 .work-card, .gallery-modal figure, .faq-page-grid aside, .legal-source-note, .map-card,
-.editorial-photo, .glass-map-car, .tone-overlay, .mega-proof, .cta-band, .hero-slide-tabs button.active,
+.editorial-photo, .glass-map-car, .tone-overlay, .mega-proof, .cta-band, .cookie-banner, .hero-slide-tabs button.active,
 .film-tabs button.active, .faq-filter button.active, .gallery-filters button.active, .problem-tabs button.active {
   --accent-text: var(--blue);
   --accent-strong: #5cb2f2;
@@ -851,7 +851,7 @@ svg { flex: 0 0 auto; }
 .cookie-banner { position: fixed; z-index: 300; right: 20px; bottom: 20px; left: 20px; display: grid; grid-template-columns: 38px 1fr auto; gap: 16px; align-items: center; max-width: 1180px; margin: auto; padding: 18px 20px; color: white; background: rgba(7,62,119,.97); box-shadow: 0 20px 65px rgba(0,0,0,.35); backdrop-filter: blur(18px); }
 .cookie-banner > svg { color: var(--accent-text); }
 .cookie-banner strong { font: 700 13px 'Manrope'; }
-.cookie-banner p { margin: 2px 0 0; color: #95a7b8; font-size: 10px; line-height: 1.5; }
+.cookie-banner p { margin: 2px 0 0; color: var(--muted-text); font-size: 10px; line-height: 1.5; }
 .cookie-actions { display: flex; gap: 7px; }
 .cookie-actions button { padding: 10px 12px; color: white; border: 1px solid #2a5c8f; background: transparent; cursor: pointer; font-size: 9px; font-weight: 700; }
 .cookie-actions .accept { border-color: var(--accent-text); background: var(--brand); }
