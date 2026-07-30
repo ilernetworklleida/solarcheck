@@ -5,7 +5,8 @@
     "build": "vite build && node scripts/generate-static-pages.mjs",
     "preview": "vite preview",
     "check": "node scripts/check-site.mjs",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "audit:contrast": "node scripts/audit-contrast.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
